@@ -1,0 +1,74 @@
+###
+POST http://localhost:80/api/payment
+Content-Type: application/json
+
+{
+  "phoneNumber": "+998902455897",
+  "amount": 100000,
+  "type": "CLICK"
+}
+
+
+###
+###
+POST http://localhost:80/api/simCard
+Content-Type: application/json
+
+{
+  "passportID": "fwfwfww222",
+  "passportNumber": "AB2343443A",
+  "code": "90",
+  "number": "2455897"
+}
+
+###
+
+POST http://localhost:80/api/tariff
+Content-Type: application/json
+
+{
+  "name": "Bir oy",
+  "userType": "PHYSICAL_USER",
+  "price": 50000,
+  "switchPrice": 2500,
+  "expire": 30,
+  "tariffSMS": 1000,
+  "tariffMB": 1000,
+  "tariffDAQ": 1000,
+  "smsPrice": 40,
+  "mbPrice": 80,
+  "daqPrice": 40
+}
+###
+POST http://localhost:80/api/simCard/7030c23c-f851-412c-8eba-a3a5410bd63c?tariffId=1
+###
+POST http://localhost:80/api/packet
+Content-Type: application/json
+
+{
+  "type": "SMS",
+  "amount": 100000,
+  "price": 8000.52,
+  "name": "Super 10",
+  "dueDate": 7,
+  "tariffList": [1]
+
+}
+
+###
+POST http://localhost:80/api/details/7030c23c-f851-412c-8eba-a3a5410bd63c
+Content-Type: application/json
+
+{
+  "amount": 50,
+  "action": "MB"
+}
+
+
+
+###
+GET http://localhost:80/api/ussd/7030c23c-f851-412c-8eba-a3a5410bd63c?code=*102#
+
+
+###
+GET http://localhost:80/api/details/7030c23c-f851-412c-8eba-a3a5410bd63c?from=2021-10-08 09:00&to=2021-10-29 12:00
