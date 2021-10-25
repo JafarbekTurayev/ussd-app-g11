@@ -3,7 +3,6 @@ package uz.pdp.ussdapp.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import uz.pdp.ussdapp.entity.Details;
-import uz.pdp.ussdapp.entity.User;
 
 import java.util.Date;
 import java.util.List;

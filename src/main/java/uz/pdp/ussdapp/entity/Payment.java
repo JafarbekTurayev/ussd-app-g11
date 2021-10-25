@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import uz.pdp.ussdapp.entity.SimCard;
-import uz.pdp.ussdapp.entity.User;
 import uz.pdp.ussdapp.entity.enums.PayType;
 import uz.pdp.ussdapp.entity.template.AbsEntity;
 

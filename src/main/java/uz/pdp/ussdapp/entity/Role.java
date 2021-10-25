@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import uz.pdp.ussdapp.entity.enums.Permission;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -22,9 +23,9 @@ public class Role {
     //huquqlar ro'yxati
     @Enumerated(EnumType.STRING)
     @ElementCollection
-    private Set<Permission> permissions;
+    private List<Permission> permissions;
 
-    public Role(String name, Set<Permission> permissions) {
+    public Role(String name, List<Permission> permissions) {
         this.name = name;
         this.permissions = permissions;
     }
