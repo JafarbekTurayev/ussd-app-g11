@@ -46,15 +46,15 @@ public class TariffController {
         return tariffRepository.findByName(name);
 
     }
-
-    @PutMapping
+ // path yozish qolib ketgan ekan yozib qo'ydim
+    @PutMapping("/{name}")
     public HttpEntity<?>editTariff(@PathVariable String name,@RequestBody TariffDTO   tariffDTO){
         ApiResponse apiResponse = tariffService.editTariff(name, tariffDTO);
         return ResponseEntity.status(apiResponse.isSuccess()?201:409).body(apiResponse);
     }
 
     //delete by name
-    @DeleteMapping
+    @DeleteMapping("/{name}")
     public HttpEntity<?>deleteById(@PathVariable String name){
 
         if(!tariffRepository.existsByName(name)) return null;
