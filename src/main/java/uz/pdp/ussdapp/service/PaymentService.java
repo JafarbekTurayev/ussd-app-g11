@@ -11,7 +11,9 @@ import uz.pdp.ussdapp.repository.PaymentRepository;
 import uz.pdp.ussdapp.repository.SimcardRepository;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class PaymentService {
@@ -23,17 +25,19 @@ public class PaymentService {
 
     public ApiResponse add(PaymentDTO paymentDTO) {
 
-        //+998 91 2455897
-        if (paymentDTO.getPhoneNumber().startsWith("+998") && paymentDTO.getPhoneNumber().length() == 13) {
+        // paymentDTO.getPhoneNumber().startsWith("+998")
+
+        // 91 2455897 - new pattern,+998 did not work
+        if (  paymentDTO.getPhoneNumber().length() == 9) {
             boolean exists = simcardRepository.existsByCodeAndNumber(
-                    paymentDTO.getPhoneNumber().substring(4, 6),
-                    paymentDTO.getPhoneNumber().substring(6));
+                    paymentDTO.getPhoneNumber().substring(0, 2),
+                    paymentDTO.getPhoneNumber().substring(2));
 
             Optional<SimCard> optionalSimCard = simcardRepository.findByCodeAndNumber(
-                    paymentDTO.getPhoneNumber().substring(4, 6),
-                    paymentDTO.getPhoneNumber().substring(6));
+                    paymentDTO.getPhoneNumber().substring(0, 2),
+                    paymentDTO.getPhoneNumber().substring(2));
 
-            if (!exists) return new ApiResponse("Bunday raqam tizimda mavjud emas!", false);
+            if (!exists) return new ApiResponse("This phone number does not exists!", false);
 
 
             SimCard simCard = optionalSimCard.get();
@@ -52,4 +56,27 @@ public class PaymentService {
         return new ApiResponse("Phone number pattern wrong!", false);
 
     }
+
+    public ApiResponse getAll() {
+        List<Payment> paymentList = paymentRepository.findAll();
+        return new ApiResponse("Payments history",true,paymentList);
+    }
+
+
+    public ApiResponse getOne(String phoneNumber) {
+        Optional<SimCard> optionalSimCard = simcardRepository.findByCodeAndNumber(
+                phoneNumber.substring(0, 2),
+                phoneNumber.substring(2));
+        if(!optionalSimCard.isPresent()) return new ApiResponse("Phone Number does not exists!",false);
+        List<Payment> paymentList = paymentRepository.findAllByNumber(phoneNumber);
+        return new ApiResponse(phoneNumber+"-history",true,paymentList);
+
+    }
+
+    public ApiResponse delete(UUID id) {
+        paymentRepository.deleteById(id);
+        return new ApiResponse("Deleted!",true);
+    }
 }
+
+

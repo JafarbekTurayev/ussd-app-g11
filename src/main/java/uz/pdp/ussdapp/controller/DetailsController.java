@@ -32,8 +32,8 @@ public class DetailsController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/downloadExcel")
-    public HttpEntity<?> getExcel() {
-        return detailsService.getExcel();
-    }
+//    @GetMapping("/downloadExcel")
+//    public HttpEntity<?> getExcel() {
+//        return detailsService.getExcel();
+//    }
 }

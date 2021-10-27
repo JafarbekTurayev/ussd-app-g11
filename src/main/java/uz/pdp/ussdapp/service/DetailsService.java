@@ -31,8 +31,8 @@ public class DetailsService {
     TariffSimcardRepository tariffSimcardRepository;
     @Autowired
     DetailsRepository detailsRepository;
-    @Autowired
-    GenerateExcel generateExcel;
+//    @Autowired
+//    GenerateExcel generateExcel;
 
     public ApiResponse save(UUID id, DetailsDTO detailsDTO) {
 
@@ -116,27 +116,27 @@ public class DetailsService {
         return new ApiResponse("Mana", true, dateBetween);
     }
 
-    public ResponseEntity getExcel() {
-        List<Details> all = detailsRepository.findAll();
-
-        List<Details> detailsList = all.stream().map(this::getResponse).collect(Collectors.toList());
-
-        List<String> columns = columns(all.get(0));
-//        List<List<String>> collect = all.stream().map(this::columns).collect(Collectors.toList());
-
-
-        ExcelRequestDynamic requestDynamic = new ExcelRequestDynamic(
-                "Mana List",
-                columns,
-                columns,
-                detailsList,
-                new Timestamp(System.currentTimeMillis()),
-                new Timestamp(System.currentTimeMillis() + 86400 * 1000)
-        );
-
-        return generateExcel.exportDataToExcel(requestDynamic);
-//        List<ResWarehouse> warehouses = warehouseRepository.findAll().stream().map(this::getWarehouse).collect(Collectors.toList());
-    }
+//    public ResponseEntity getExcel() {
+//        List<Details> all = detailsRepository.findAll();
+//
+//        List<Details> detailsList = all.stream().map(this::getResponse).collect(Collectors.toList());
+//
+//        List<String> columns = columns(all.get(0));
+////        List<List<String>> collect = all.stream().map(this::columns).collect(Collectors.toList());
+//
+//
+//        ExcelRequestDynamic requestDynamic = new ExcelRequestDynamic(
+//                "Mana List",
+//                columns,
+//                columns,
+//                detailsList,
+//                new Timestamp(System.currentTimeMillis()),
+//                new Timestamp(System.currentTimeMillis() + 86400 * 1000)
+//        );
+//
+//        return generateExcel.exportDataToExcel(requestDynamic);
+////        List<ResWarehouse> warehouses = warehouseRepository.findAll().stream().map(this::getWarehouse).collect(Collectors.toList());
+//    }
 
     public Details getResponse(Details details) {
 
