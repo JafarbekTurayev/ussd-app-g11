@@ -5,10 +5,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import uz.pdp.ussdapp.entity.enums.Position;
 import uz.pdp.ussdapp.entity.template.AbsEntity;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.UUID;
 
 @EqualsAndHashCode(callSuper = true)
@@ -16,7 +19,7 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Staff extends AbsEntity {
+public class Staff extends AbsEntity  {
 
     @Column(nullable = false)
     private String fullName;
@@ -36,4 +39,5 @@ public class Staff extends AbsEntity {
         this.userName = userName;
         this.password = password;
     }
+
 }
