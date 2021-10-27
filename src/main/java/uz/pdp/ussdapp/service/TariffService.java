@@ -9,6 +9,8 @@ import uz.pdp.ussdapp.payload.TariffDTO;
 import uz.pdp.ussdapp.repository.TariffRepository;
 import uz.pdp.ussdapp.repository.TariffSimcardRepository;
 
+import java.util.Optional;
+
 @Service
 public class TariffService {
     @Autowired
@@ -33,6 +35,31 @@ public class TariffService {
 
         tariffRepository.save(tariff);
         return new ApiResponse("Saved!", true);
+
+    }
+
+    public ApiResponse editTariff(String name, TariffDTO tariffDTO) {
+
+        if (!tariffRepository.existsByName(name)) return new ApiResponse("tariff not found", false);
+        Optional<Tariff> byName = tariffRepository.findByName(name);
+        Tariff tariff = byName.get();
+        tariff.setTariffMB(tariffDTO.getTariffMB());
+
+        tariff.setTariffSMS(tariffDTO.getTariffSMS());
+        tariff.setDaqPrice(tariffDTO.getDaqPrice());
+        tariff.setTariffMB(tariffDTO.getTariffMB());
+        tariff.setTariffMB(tariffDTO.getTariffMB());
+        tariff.setExpire(tariffDTO.getExpire());
+        tariff.setPrice(tariffDTO.getPrice());
+        tariff.setMbPrice(tariffDTO.getMbPrice());
+        tariff.setDaqPrice(tariffDTO.getDaqPrice());
+        tariff.setSmsPrice(tariffDTO.getSmsPrice());
+        tariff.setSwitchPrice(tariffDTO.getSwitchPrice());
+        tariff.setUserType(UserType.PHYSICAL_USER);
+        tariff.setName("special30");
+        tariffRepository.save(tariff);
+        return new ApiResponse("success", true);
+
 
     }
 }

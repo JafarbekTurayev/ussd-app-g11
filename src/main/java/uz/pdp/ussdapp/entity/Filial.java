@@ -4,22 +4,24 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import uz.pdp.ussdapp.entity.enums.Position;
 import uz.pdp.ussdapp.entity.template.AbsEntity;
 import uz.pdp.ussdapp.entity.template.AbsNameEntity;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.util.List;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Filial extends AbsEntity {
+public class Filial {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
     private String name;
+
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "filial")
     private List<Staff> staffList;
@@ -27,4 +29,12 @@ public class Filial extends AbsEntity {
     @OneToOne
     private Staff director;
 
+    @OneToOne
+    private Staff filialManager;
+
+    public Filial(String name, List<Staff> staffList, Staff director) {
+        this.name = name;
+        this.staffList = staffList;
+        this.director = director;
+    }
 }

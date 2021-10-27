@@ -6,4 +6,8 @@ import uz.pdp.ussdapp.entity.Tariff;
 
 public interface TariffRepository extends JpaRepository<Tariff, Integer> {
     boolean existsByName(String name);
+
+    Optional<Tariff>findByName(String name);
+
+    void deleteByName(String name);
 }
