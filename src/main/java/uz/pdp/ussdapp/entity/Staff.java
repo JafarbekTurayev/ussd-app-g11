@@ -9,6 +9,7 @@ import uz.pdp.ussdapp.entity.enums.Position;
 import uz.pdp.ussdapp.entity.template.AbsEntity;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
@@ -25,6 +26,7 @@ public class Staff extends AbsEntity {
     private String password;
     @Enumerated(EnumType.STRING)
     private Position position;
+    private String tourniquet = "ID" + UUID.randomUUID().toString().substring(0, 8);
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Filial filial;
