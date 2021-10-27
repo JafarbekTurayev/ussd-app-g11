@@ -8,6 +8,7 @@ import uz.pdp.ussdapp.entity.Tariff;
 import uz.pdp.ussdapp.entity.TariffSimcard;
 import uz.pdp.ussdapp.payload.ApiResponse;
 import uz.pdp.ussdapp.payload.RegisterDTO;
+import uz.pdp.ussdapp.payload.SimCardDto;
 import uz.pdp.ussdapp.repository.PacketRepository;
 import uz.pdp.ussdapp.repository.SimcardRepository;
 import uz.pdp.ussdapp.repository.TariffRepository;
@@ -115,5 +116,51 @@ public class SimCardService {
         simCard.setBalance(simCard.getBalance() - packet.getPrice());
         simcardRepository.save(simCard);
         return new ApiResponse("Save", true);
+    }
+
+    public ApiResponse getById(UUID id) {
+        Optional<SimCard> byId = simcardRepository.findById(id);
+        if (!byId.isPresent()) return new ApiResponse("Not found!", false);
+        return new ApiResponse("Found", true, byId.get());
+    }
+
+    public ApiResponse addSimCard(SimCardDto simCardDto) {
+        SimCard simCard = new SimCard();
+        simCard.setCode(simCardDto.getCode());
+        simCard.setNumber(simCardDto.getNumber());
+        simCard.setBalance(0);
+        simCard.setActive(true);
+        List<Packet> allById = packetRepository.findAllById(simCardDto.getPacketList());
+        simCard.setPackets(allById);
+        simcardRepository.save(simCard);
+        return new ApiResponse("Saved", true);
+    }
+
+    public ApiResponse getAll() {
+
+        List<SimCard> all = simcardRepository.findAll();
+        return new ApiResponse("Found", true, all);
+    }
+
+    public ApiResponse edit(UUID id, SimCardDto simCardDto) {
+        Optional<SimCard> byId = simcardRepository.findById(id);
+        if (!byId.isPresent()) return new ApiResponse("Not Found", false);
+        SimCard simCard = byId.get();
+        simCard.setCode(simCardDto.getCode());
+        simCard.setNumber(simCardDto.getNumber());
+        simCard.setBalance(0);
+        simCard.setActive(true);
+        List<Packet> allById = packetRepository.findAllById(simCardDto.getPacketList());
+        simCard.setPackets(allById);
+        simcardRepository.save(simCard);
+        return new ApiResponse("Edited", true);
+    }
+
+    public ApiResponse delete(UUID id) {
+        Optional<SimCard> byId = simcardRepository.findById(id);
+        if (simcardRepository.existsById(id)) {
+            simcardRepository.deleteById(id);
+        }
+        return new ApiResponse("Deleted", true);
     }
 }

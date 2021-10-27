@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
 import uz.pdp.ussdapp.entity.enums.UserType;
 import uz.pdp.ussdapp.entity.template.AbsEntity;
 
@@ -28,6 +29,7 @@ public class SimCard extends AbsEntity {
     private String number;
     private double balance;
     private boolean active;
+    @CreatedDate
     private Date start;
 
     @ManyToMany(fetch = FetchType.LAZY)
