@@ -15,7 +15,8 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/myProfile")
 public class ForPersonalStaff {
-    /// Bu controller faqat staff uchun u o'zini ko'ra oladi va o'zgartira oladi
+    /// Bu controller faqat staff uchun u o'zini ko'ra oladi va o'zgartira oladi bunda imkoniyatlar cheklangan
+    // bu controllerni o'shirish krk emas!
     @Autowired
     StaffRepository staffRepository;
 
