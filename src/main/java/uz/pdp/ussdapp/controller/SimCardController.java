@@ -28,11 +28,11 @@ public class SimCardController {
         return ResponseEntity.status(response.isSuccess() ? 200 : 404).body(response);
     }
 
-    @PostMapping("/{id}")
-    public HttpEntity<?> buyPacket(@PathVariable UUID id, @RequestParam Integer packetId) {
-        ApiResponse response = simCardService.buyPacket(id, packetId);
-        return ResponseEntity.ok(response);
-    }
+//    @PostMapping("/{id}")
+//    public HttpEntity<?> buyPacket(@PathVariable UUID id, @RequestParam Integer packetId) {
+//        ApiResponse response = simCardService.buyPacket(id, packetId);
+//        return ResponseEntity.ok(response);
+//    }
 
 
 }

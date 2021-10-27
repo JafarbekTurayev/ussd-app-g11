@@ -31,7 +31,7 @@ public class TariffController {
     }
 
     //get all
-    @GetMapping
+    @GetMapping("/all")
     public List<Tariff> getTariff(){
         List<Tariff> all = tariffRepository.findAll();
         return all;
@@ -39,7 +39,7 @@ public class TariffController {
     }
 
     //byname
-    @GetMapping
+    @GetMapping("/{name}")
     public Optional<Tariff> getTarif(@PathVariable String name){
         boolean existsByName = tariffRepository.existsByName(name);
         if (!existsByName) return Optional.empty();
